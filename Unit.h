@@ -18,6 +18,7 @@ class Unit {
     void takeDamage(int dmg);
     void takeStagger(int stag);
     void inheritSkillSet(SkillSet* newSkillSet);
+    void displayUnitInfo();
     ~Unit(){
       delete skillSet;
     }      

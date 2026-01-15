@@ -1,7 +1,9 @@
+
 #include <iostream>
 #include "SkillSet.h"
 
 SkillSet* genDemoSkillSet_1(){
+  cout<< "\033[31m";
   SkillSet *demoSkillSet1 = new SkillSet();
 
   Skill* slashSkill = new Skill("Slash Attack");
@@ -19,6 +21,10 @@ SkillSet* genDemoSkillSet_1(){
   demoSkillSet1->addSkill(slashSkill, true);
   demoSkillSet1->addSkill(pierceSkill, false);
   demoSkillSet1->listSkills();
+
+
+//
+  cout<< "\033[0m"; // reset text color
 
   return demoSkillSet1;
   
