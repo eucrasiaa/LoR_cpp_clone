@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Unit.h"
+#include "CombatEngine.h"
+
 class CombatScene {
   public:
     Unit** players;
@@ -9,13 +11,15 @@ class CombatScene {
     int enemyCount;
     int turnNumber = 0;
     // can i setup the constructor to take a variable num
-    
+    // CombatEngine * engine;
+
     CombatScene(){
       turnNumber = 0;
       playerCount = 0;
       enemyCount = 0;
       players = nullptr;
       enemies = nullptr;
+      // engine = new CombatEngine();
     }
     // can these take a list of units instead? like Unit, Unit, Unit... 
     // use variadic templates?
@@ -26,11 +30,17 @@ class CombatScene {
     int getTurnNumber(){ return turnNumber; }
     int getPlayerCount(){ return playerCount; }
     int getEnemyCount(){ return enemyCount; }
+   
+    void displayEnemyPreTurn();
+    void combatStep();
 
     void displayCombatants();
     void startCombat();
+    void skillAndTarget();
     ~CombatScene(){
       delete[] players;
       delete[] enemies;
+      // delete engine;
     }
+    
 };

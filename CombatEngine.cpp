@@ -10,4 +10,10 @@
 // // - enemy units targeting
 // // - enemy units actions
 #include "CombatEngine.h"
-CombatEngine::CombatEngine(int playerUnitCount, int enemyUnitCount): playerUnitCount(playerUnitCount), enemyUnitCount(enemyUnitCount){};
+// CombatEngine::CombatEngine(int playerUnitCount, int enemyUnitCount): playerUnitCount(playerUnitCount), enemyUnitCount(enemyUnitCount){};
+
+int CombatEngine::validatePreTurn(){
+  // ensure all units have a valid selected skill and target
+  // return 0 if all valid, else return error code
+  return 0;
+}

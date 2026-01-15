@@ -20,6 +20,7 @@ class Unit {
     int stagger;
     int turnStaggered = -1;
     int chosenSkillIndex = -1;
+    int targetedUnitIndex = -1;
     SkillSet * activeSkills;
 
     
@@ -33,13 +34,13 @@ class Unit {
     void displayUnitInfoColorful();
     
     void newCombatReset();
-
+    void setTarget(int targetIndex);
+    
     void combatTurnInit(int turnNumber );
    
     // 
     int selectSkill(); // returns index of chosen skill
     Unit* chooseTarget(Unit** enemies, int enemyCount); // given by CombatScene
-
 
     ~Unit(){
       delete skillSet;

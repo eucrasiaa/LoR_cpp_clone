@@ -44,6 +44,7 @@ void Unit::newCombatReset(){
   stagger = maxStagger;
   turnStaggered = -1;
   chosenSkillIndex = -1;
+  targetedUnitIndex = -1;
   skillSet->resetSkills();
   skillSet->drawSkill(); // draw initial 1
   skillSet->drawSkill(); // draw initial 2
@@ -80,25 +81,40 @@ int Unit::selectSkill(){
   }
   else {
     // player skill selection logic would go here
+    // display active skills
+    skillSet->displayAllSkillsColorful();
+    // prompt for input
+    int choice = -1;
+    while (choice < 1 || choice > skillSet->getSkillCount()){
+      cout<<"Select a skill to use (1 - "<<skillSet->getSkillCount()<<"): ";
+      cin>>choice;
+      if (choice < 1 || choice > skillSet->getSkillCount()){
+        cout<<"Invalid choice, please try again."<<endl;
+      }
+    }
+    chosenSkillIndex = choice - 1;
+
+    cout<<"Player "<<name<<" selects skill "<<skillSet->skills[chosenSkillIndex]->getSkillName()<<"!"<<endl;
     // for now, just return the first skill
-    // and validate it is usable
-    chosenSkillIndex = 0;
+    // // and validate it is usable
+    // cout<<"Player "<<name<<" selects first active skill!"<<endl;
+    // chosenSkillIndex = 0;
     return chosenSkillIndex;
   }
 } // returns index of chosen skill
+
+void Unit::setTarget(int targetIndex){
+  targetedUnitIndex = targetIndex;
+}
+
 Unit* Unit::chooseTarget(Unit** enemies, int enemyCount){
-  // if its an enemy, choose a random target
-  //
-  // else:
-  if (unitType == ENEMY){
-    int targetIndex = rand() % enemyCount;
-    return enemies[targetIndex];
-  }
-  else {
+    //enemies have been handled, so can safely read their targeting and such
     // player target selection logic would go here
     // for now, just return the first enemy
     return enemies[0];
+    // display enemies
+
   }
-} // given by CombatScene
+ // given by CombatScene
 
 

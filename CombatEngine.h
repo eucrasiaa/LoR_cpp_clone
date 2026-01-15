@@ -1,8 +1,9 @@
 #pragma once
+#include "CombatScene.h"
 class CombatEngine{
   friend class Unit;
+  friend class CombatScene;
   public:
-    int playerUnitCount;
-    int enemyUnitCount;
-  CombatEngine(int playerUnitCount, int enemyUnitCount);
+    int validatePreTurn(); // ensure all units have a valid selected skill and target
+    CombatEngine();
 };  
