@@ -17,9 +17,9 @@ SkillSet* genDemoSkillSet_1(){
 
 
   std::cout << "Demo Skill Set Created" << std::endl;
-  demoSkillSet1->addSkill(slashSkill, true);
+  demoSkillSet1->addSkill(slashSkill, false);
   demoSkillSet1->addSkill(pierceSkill, false);
-  demoSkillSet1->listSkills();
+  demoSkillSet1->displayAllSkills();
 
 
 //
@@ -27,4 +27,33 @@ SkillSet* genDemoSkillSet_1(){
 
   return demoSkillSet1;
   
+}
+
+SkillSet* genDemoSkillSet_2(){
+  cout<< "\033[31m";
+  SkillSet *demoSkillSet2 = new SkillSet();
+
+  Skill* bashSkill = new Skill("Bash Attack");
+  Move* bashMove = new Attack(ActionType::ATTACK, 20, 30, DamageType::BLUNT);
+  bashSkill->addMove(bashMove);
+
+  Skill* sliceSkill = new Skill("Vertical Slash");
+
+  Move* sliceMove = new Attack(ActionType::ATTACK, 20, 30, DamageType::SLASH);
+  sliceSkill->addMove(sliceMove);
+
+
+  std::cout << "Demo Skill Set Created" << std::endl;
+  demoSkillSet2->addSkill(bashSkill, false);
+  demoSkillSet2->addSkill(sliceSkill, false);
+  demoSkillSet2->displayAllSkills();
+//
+  cout<< "\033[0m"; // reset text color 
+  return demoSkillSet2;
+}
+
+void DrawLine(int rows=1, int color=37){
+  // color codes: 30-black, 31-red, 32-green, 33-yellow, 34-blue, 35-magenta, 36-cyan, 37-white
+  for (int i=0; i<rows; i++)
+    std::cout << "\033[" << color << "m" << "----------------------------------------" << "\033[0m" << std::endl;
 }

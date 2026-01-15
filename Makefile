@@ -4,7 +4,7 @@ SAN_FLAG = -fsanitize=address
 
 # main = main.cpp 
 # SkillSet.cpp uses Skill.cpp uses Move.cpp + Move.h
-OBJS = skillset_test.o Unit.o devFunctions.o SkillSet.o Skill.o Move.o
+OBJS = skillset_test.o Unit.o devFunctions.o SkillSet.o Skill.o Move.o CombatScene.o CombatEngine.o
 
 TARGET = skillset_test
 all: $(TARGET)
@@ -13,7 +13,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $(SAN_FLAG) -o $(TARGET) $(OBJS)
 
-skillset_test.o: skillset_test.cpp Unit.h SkillSetGen.o
+skillset_test.o: skillset_test.cpp Unit.h CombatScene.o CombatEngine.o devFunctions.o
 	$(CC) $(CFLAGS) $(SAN_FLAG) -c skillset_test.cpp
 
 Unit.o: Unit.cpp Unit.h SkillSet.h
@@ -30,6 +30,11 @@ Skill.o: Skill.cpp Skill.h Move.h
 
 Move.o: Move.cpp Move.h
 	$(CC) $(CFLAGS) $(SAN_FLAG) -c Move.cpp
+
+CombatScene.o: CombatScene.cpp CombatScene.h Unit.h SkillSet.h
+	$(CC) $(CFLAGS) $(SAN_FLAG) -c CombatScene.cpp
+CombatEngine.o: CombatEngine.cpp CombatEngine.h CombatScene.h Unit.h SkillSet.h
+	$(CC) $(CFLAGS) $(SAN_FLAG) -c CombatEngine.cpp
 
 clean:
 	rm -f $(OBJS) $(TARGET)

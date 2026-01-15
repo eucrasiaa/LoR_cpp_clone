@@ -22,7 +22,7 @@ std::string Skill::DisplaySkill() {
   std::string result = skillName + ":\n";
   for (int i = 0; i < moveCount; i++) {
     if (moves[i] != nullptr) {
-      result += "  - " + moves[i]->displayMove() + "\n";
+      result += "  - " + moves[i]->displayMoveColorful() + "\n";
     }
   }
   return result;

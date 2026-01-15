@@ -11,15 +11,40 @@ class SkillSet{
     bool active[10];   // marks if skill is active or not
     int skillCount;
     SkillSet();
-    void listSkills();
+    void displayAllSkills();
+    void displayAllSkillsColorful();
     
-    void addSkill(Skill* skill, bool isActive=false){
-      if(skillCount <10){
-        skills[skillCount] = skill;
-        active[skillCount] = isActive; // default to inactive
-        skillCount++;
-      }
+    void addSkill(Skill* skill, bool isActive);
+    
+
+
+
+    int getSkillCount(){
+      return skillCount;
     }
+
+    int getActiveSkillCount(){
+      int count = 0;
+      for(int i=0; i<skillCount; i++){
+        if(active[i]){
+          count++;
+        }
+      }
+      return count;
+    }
+
+    void drawSkill();
+      // picks a random inactive skills and adds it to active pool
+
+    int* activeSkillPool();
+
+    void resetSkills(){
+      for(int i=0; i<skillCount; i++){
+        active[i] = false;
+      }
+
+    }
+
     ~SkillSet(){
       for(int i=0; i<skillCount; i++){
         delete skills[i];

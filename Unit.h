@@ -3,22 +3,44 @@
 #include <cstdlib>
 #include "SkillSet.h"
 using namespace std;
-
+enum UnitType { PLAYER, ENEMY };
 class Unit {
   public:
+    // persistant stats
     std::string name;
-    int hp, maxHp;
-    int stagger, maxStagger;
+    int maxHp;
+    int maxStagger;
     int speedMin, speedMax;
-    int currentSpeed;
     SkillSet * skillSet;
+    UnitType unitType;
+    // in combat stats
 
-    Unit(std::string n, int h, int s, int sMin, int sMax);
+    int currentSpeed;
+    int hp;
+    int stagger;
+    int turnStaggered = -1;
+    int chosenSkillIndex = -1;
+    SkillSet * activeSkills;
+
+    
+    Unit(std::string n, int h, int s, int sMin, int sMax, UnitType uType) 
+      : name(n), maxHp(h), hp(h), maxStagger(s), stagger(s), speedMin(sMin), speedMax(sMax), unitType(uType) {};
     void rollSpeed();
     void takeDamage(int dmg);
     void takeStagger(int stag);
     void inheritSkillSet(SkillSet* newSkillSet);
     void displayUnitInfo();
+    void displayUnitInfoColorful();
+    
+    void newCombatReset();
+
+    void combatTurnInit(int turnNumber );
+   
+    // 
+    int selectSkill(); // returns index of chosen skill
+    Unit* chooseTarget(Unit** enemies, int enemyCount); // given by CombatScene
+
+
     ~Unit(){
       delete skillSet;
     }      

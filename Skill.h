@@ -14,6 +14,9 @@ class Skill {
     Skill(std::string name);
     void addMove(Move* move);
     std::string DisplaySkill();
+    std::string getSkillName(){
+      return skillName;
+    }
     ~Skill(){
       for(int i=0; i<moveCount; i++){
         delete moves[i];

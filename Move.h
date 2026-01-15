@@ -17,6 +17,7 @@ class Move {
   string actionTypeToString(ActionType aType);
 
   string displayMove();
+  string displayMoveColorful();
   virtual ~Move(){}
 };
 class Attack : public Move {
