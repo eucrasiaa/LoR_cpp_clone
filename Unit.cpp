@@ -107,14 +107,14 @@ void Unit::setTarget(int targetIndex){
   targetedUnitIndex = targetIndex;
 }
 
-Unit* Unit::chooseTarget(Unit** enemies, int enemyCount){
-    //enemies have been handled, so can safely read their targeting and such
-    // player target selection logic would go here
-    // for now, just return the first enemy
-    return enemies[0];
-    // display enemies
-
-  }
+// Unit* Unit::chooseTarget(Unit** enemies, int enemyCount){
+//     //enemies have been handled, so can safely read their targeting and such
+//     // player target selection logic would go here
+//     // for now, just return the first enemy
+//     return enemies[0];
+//     // display enemies
+//
+//   }
  // given by CombatScene
 
 

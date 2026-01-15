@@ -23,7 +23,9 @@ int main(){
   devScene->LoadPlayers({testUnit});
   devScene->LoadEnemies({enemyUnit});
   devScene->startCombat();
-
+  devScene->displayEnemyPreTurn();
+  DrawLine(1, 34); // blue 
+  devScene->skillAndTarget();
   delete devScene;
   
   delete testUnit;

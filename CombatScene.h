@@ -11,16 +11,9 @@ class CombatScene {
     int enemyCount;
     int turnNumber = 0;
     // can i setup the constructor to take a variable num
-    // CombatEngine * engine;
+    CombatEngine *engine;
 
-    CombatScene(){
-      turnNumber = 0;
-      playerCount = 0;
-      enemyCount = 0;
-      players = nullptr;
-      enemies = nullptr;
-      // engine = new CombatEngine();
-    }
+    CombatScene();
     // can these take a list of units instead? like Unit, Unit, Unit... 
     // use variadic templates?
     void LoadPlayers(std::initializer_list<Unit*> playerList);
@@ -37,10 +30,12 @@ class CombatScene {
     void displayCombatants();
     void startCombat();
     void skillAndTarget();
+
+    int preDamageValidate();
     ~CombatScene(){
       delete[] players;
       delete[] enemies;
-      // delete engine;
+      delete engine;
     }
     
 };

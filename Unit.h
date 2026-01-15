@@ -40,7 +40,7 @@ class Unit {
    
     // 
     int selectSkill(); // returns index of chosen skill
-    Unit* chooseTarget(Unit** enemies, int enemyCount); // given by CombatScene
+    // Unit* chooseTarget(Unit** enemies, int enemyCount); // given by CombatScene
 
     ~Unit(){
       delete skillSet;
