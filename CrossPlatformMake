@@ -1,0 +1,52 @@
+# Default to Linux if not specified
+PLATFORM ?= linux
+
+# --- Common Settings ---
+# Note: No sanitizer here yet! We add it only for Linux below.
+CXXFLAGS_COMMON = -g -Wall -Wextra -pedantic
+
+# --- Platform Specific Settings ---
+ifeq ($(PLATFORM),windows)
+    # Windows Settings
+    CXX      = x86_64-w64-mingw32-g++
+    EXT      = .exe
+    # Disable Sanitize for Windows (Fixes your errors)
+    SANITIZER_FLAGS = 
+    # Static linking makes the .exe standalone (no missing DLL errors)
+    LDFLAGS  = -static -static-libgcc -static-libstdc++
+else
+    # Linux Settings
+    CXX      = g++
+    EXT      = 
+    # Enable Sanitize for Linux
+    SANITIZER_FLAGS = -fsanitize=address
+    LDFLAGS  = $(SANITIZER_FLAGS)
+endif
+
+# Combine flags
+CXXFLAGS = $(CXXFLAGS_COMMON) $(SANITIZER_FLAGS)
+
+# --- Files ---
+TARGET   = skillset_test$(EXT)
+# Automatically find all .cpp files
+SRCS     = $(wildcard *.cpp)
+OBJS     = $(SRCS:.cpp=.o)
+
+# --- Rules ---
+
+all: $(TARGET)
+
+# Link Step
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+# Compile Step (Generating .o files)
+# -MMD creates .d files for header tracking
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -MMD -c $< -o $@
+
+# Include dependencies
+-include $(OBJS:.o=.d)
+
+clean:
+	rm -f skillset_test skillset_test.exe *.o *.d

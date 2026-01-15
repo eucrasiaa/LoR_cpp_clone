@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Unit.h"
-#include "SkillSetGen.cpp"
+#include "devFunctions.h"
 
 int main(){
   cout<<"Starting SkillSet Test"<<endl;
@@ -14,4 +14,7 @@ int main(){
   delete testUnit;
   cout<<"Ending SkillSet Test"<<endl;
   return 0;
+}
+int WinMain(){
+  return main();
 }
